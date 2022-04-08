@@ -7,7 +7,6 @@ import img from '../../images/img.png'
 
 function Login() {
   return (
-    
         <Container className="mt-5">
             <Row>
                 <Col lg={4} md={6} sm={12} className="text-center p-3 mt-5">
@@ -23,7 +22,7 @@ function Login() {
                             <Button variant="outline-primary" type="submit" size="lg">
                                 Login
                             </Button>
-                            <div className='text-start' mt-3>
+                            <div className='text-start h-1' mt-3>
                                 <a href="#"><small className='reset'>Dont have an account? Signup</small></a>
                             </div>
                         </div>

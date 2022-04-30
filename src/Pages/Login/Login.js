@@ -1,42 +1,58 @@
 import React from 'react'
-import {Col,Container,Row,Form,Button} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './Login.css'
 import loginIcon from '../../images/userimg.jpg'
 import img from '../../images/img.png'
 
 function Login() {
   return (
-        <Container className="mt-5">
-            <Row>
-                <Col lg={4} md={6} sm={12} className="text-center p-3 mt-5">
-                    <img className="icon-img mb-2" src={loginIcon} alt="icon" />
-                    <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="email" placeholder="Enter email" />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="Password" />
-                        </Form.Group>
-                        <div className='d-grid gap-2'>
-                            <Button variant="outline-primary" type="submit" size="lg">
-                                Login
-                            </Button>
-                            <div className='text-start h-1' mt-3>
-                                <a href="#"><small className='reset'>Dont have an account? Signup</small></a>
-                            </div>
-                        </div>
-                        
-                    </Form>
-
-                </Col>
-                <Col lg={8} md={6} sm={12}>
-                    <img className='w-100' src={img} alt=""/>
-                </Col>
-            </Row>
-        </Container>
-    
-  )
+    <div className="ml-16">
+      <div className="flex justify-around">
+        <div className="text-center w-1/3">
+          <div className='flex flex-col justify-center h-3/4'>
+            <img
+              className="mb-2"
+              src={loginIcon}
+              alt="icon"
+              style={{ width: "100px", height: "100px" }}
+            />
+            <form>
+              <div className="mb-3" controlId="formBasicEmail">
+                <input
+                  className="h-10 block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                  type="email"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div className="mb-3" controlId="formBasicPassword">
+                <input
+                  className="h-10 block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div className="grid gap-2">
+                <button
+                  className="h-12 outline outline-1 hover:outline-2 outline-blue-500 text-lg hover:bg-blue-500 hover:text-white rounded-sm"
+                  type="submit"
+                >
+                  Login
+                </button>
+                <div className="flex justify-start h-1" mt-3>
+                  <a href="#">
+                    <small className="reset">
+                      Dont have an account? Signup
+                    </small>
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <img style={{ height: "100vh" }} src={img} alt="" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

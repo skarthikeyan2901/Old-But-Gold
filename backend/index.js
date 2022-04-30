@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 const server = http.createServer(app);
 app.use(express.json());
 const mongoose = require("mongoose");
-
+const UserRouter = require('./api/User');
 mongoose
     .connect(process.env.MONGOURI, {
         useNewUrlParser: true,
@@ -25,3 +25,9 @@ mongoose
 server.listen(PORT, () => {
   console.log("Server is running", PORT);
 });
+
+app.get('/',(req,res)=>{
+    res.send("Old but Gold!")
+})
+
+app.use('/user',UserRouter);

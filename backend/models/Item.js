@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const schema = mongoose.schema;
 
 const ItemSchema = new mongoose.Schema({
-    name: String,
-    owner: String,
+    User:UserSchema,
+    name:String,
     type: String,
     images: Array,
 })

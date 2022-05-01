@@ -4,7 +4,7 @@ import './Home.css'
 
 function Home() {
     return (
-        <div className='bg-img mx-auto'>
+        <div className='bg-img'>
             <NavBar />
         </div>
     )

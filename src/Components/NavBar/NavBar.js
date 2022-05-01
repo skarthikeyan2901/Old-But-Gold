@@ -28,9 +28,9 @@ function NavBar() {
                 </div>
             </div>
             <div className={`px-4 pb-3 ${menuIsOpen ? "block" : "hidden"} sm:flex sm:items-center sm:pb-0`}>
-                <span className="block hover:bg-purple-600 px-2 py-1">Point 1</span>
-                <span className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0">Point 2</span>
-                <span className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0">Point 3</span>
+                <span className="block hover:bg-purple-600 px-2 py-1"><a href="/login">Login</a></span>
+                <span className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0"><a href="/signup">SignUp</a></span>
+                <span className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0"><a href="/">Home</a></span>
                 <span className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0">Point 4</span>
             </div>
         </header>

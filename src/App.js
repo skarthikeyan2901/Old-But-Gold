@@ -1,6 +1,7 @@
 import Login from './Pages/Login/Login'
 import SignUp from './Pages/SignUp/SignUp';
 import Home from './Pages/Home/Home';
+import Profile from './Pages/Profile/Profile';
 import {
   BrowserRouter,
   Routes,
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
       </BrowserRouter>
     </div>

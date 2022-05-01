@@ -2,11 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router';
 import loginIcon from '../../images/userimg.jpg'
 import img from '../../images/img.png'
-
+import NavBar from '../../Components/NavBar/NavBar';
 function SignUp() {
   const navigate = useNavigate();
   return (
-    <div className="ml-16">
+    <div>
+      <NavBar />
       <div className="flex justify-around">
         <div className="text-center w-1/3">
           <div className="flex flex-col justify-center h-4/5">

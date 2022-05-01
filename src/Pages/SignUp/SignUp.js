@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router';
 import loginIcon from '../../images/userimg.jpg'
 import img from '../../images/img.png'
 
 function SignUp() {
+  const navigate = useNavigate();
   return (
     <div className="ml-16">
       <div className="flex justify-around">
@@ -17,45 +19,43 @@ function SignUp() {
             <form>
               <div className="mb-3" controlId="formBasicName">
                 <input
-                  className="h-10 block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                  className="h-10 formElement"
                   type="email"
                   placeholder="Enter name"
                 />
               </div>
               <div className="mb-3" controlId="formBasicEmail">
                 <input
-                  className="h-10 block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                  className="h-10 formElement"
                   type="email"
                   placeholder="Enter email"
                 />
               </div>
               <div className="mb-3" controlId="formBasicPassword">
                 <input
-                  className="h-10 block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                  className="h-10 formElement"
                   type="password"
                   placeholder="Enter password"
                 />
               </div>
               <div className="mb-3" controlId="formBasicConfirmPassword">
                 <input
-                  className="h-10 block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
+                  className="h-10 formElement"
                   type="email"
                   placeholder="Confirm password"
                 />
               </div>
               <div className="grid gap-2">
                 <button
-                  className="h-12 outline outline-1 hover:outline-2 outline-blue-500 text-lg hover:bg-blue-500 hover:text-white rounded-sm"
+                  className="h-12 text-blue-700 outline outline-1 hover:outline-2 outline-blue-500 text-lg hover:bg-blue-500 hover:text-white rounded-sm"
                   type="submit"
                 >
                   Sign Up
                 </button>
-                <div className="flex justify-start h-1" mt-3>
-                  <a href="#">
-                    <small className="reset">
-                      Already have an account? Login
-                    </small>
-                  </a>
+                <div className="flex justify-start h-1 mt-2">
+                  <span className="underline text-blue-700 text-sm cursor-pointer" onClick={() => {navigate("/login")}}>
+                    Already have an account? Login
+                  </span>
                 </div>
               </div>
             </form>

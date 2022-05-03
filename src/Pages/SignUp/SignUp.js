@@ -11,12 +11,14 @@ function SignUp() {
       <div className="flex justify-around">
         <div className="text-center w-1/3">
           <div className="flex flex-col justify-center h-4/5">
-            <img
-              className="mb-2"
-              src={loginIcon}
-              alt="icon"
-              style={{ width: "100px", height: "100px" }}
-            />
+            <div className='flex justify-center'>
+              <img
+                className="mb-2"
+                src={loginIcon}
+                alt="icon"
+                style={{ width: "100px", height: "100px" }}
+              />
+            </div>
             <form>
               <div className="mb-3" controlId="formBasicName">
                 <input
@@ -53,7 +55,7 @@ function SignUp() {
                 >
                   Sign Up
                 </button>
-                <div className="flex justify-start h-1 mt-2">
+                <div className="flex justify-center h-1 mt-4">
                   <span className="underline text-blue-700 text-sm cursor-pointer" onClick={() => {navigate("/login")}}>
                     Already have an account? Login
                   </span>
@@ -63,7 +65,7 @@ function SignUp() {
           </div>
         </div>
         <div>
-          <img style={{ height: "100vh" }} src={img} alt="" />
+          <img style={{ height: "93vh" }} src={img} alt="" />
         </div>
       </div>
     </div>

@@ -12,12 +12,14 @@ function Login() {
       <div className="flex justify-around">
         <div className="text-center w-1/3">
           <div className='flex flex-col justify-center h-3/4'>
-            <img
-              className="mb-2"
-              src={loginIcon}
-              alt="icon"
-              style={{ width: "100px", height: "100px" }}
-            />
+            <div className='flex justify-center'>
+              <img
+                className="mb-2"
+                src={loginIcon}
+                alt="icon"
+                style={{ width: "100px", height: "100px" }}
+              />
+            </div>
             <form>
               <div className="mb-3" controlId="formBasicEmail">
                 <input
@@ -30,7 +32,7 @@ function Login() {
                 <input
                   className="h-10 formElement"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Enter password"
                 />
               </div>
               <div className="grid gap-2">
@@ -40,7 +42,7 @@ function Login() {
                 >
                   Login
                 </button>
-                <div className="flex justify-start h-1 mt-2">
+                <div className="flex justify-center h-1 mt-4">
                   <span className="underline text-blue-700 text-sm cursor-pointer" onClick={() => { navigate('/signup') }}>
                     Don't have an account? Signup
                   </span>
@@ -50,7 +52,7 @@ function Login() {
           </div>
         </div>
         <div>
-          <img style={{ height: "100vh" }} src={img} alt="" />
+          <img style={{ height: "93vh" }} src={img} alt="" />
         </div>
       </div>
     </div>

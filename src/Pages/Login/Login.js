@@ -59,6 +59,7 @@ function Login() {
                   className="h-10 formElement"
                   type="email"
                   placeholder="Enter email"
+                  required
                 />
               </div>
               <div className="mb-3" controlId="formBasicPassword">
@@ -70,6 +71,7 @@ function Login() {
                   className="h-10 formElement"
                   type="password"
                   placeholder="Enter password"
+                  required
                 />
               </div>
               <div className="grid gap-2">

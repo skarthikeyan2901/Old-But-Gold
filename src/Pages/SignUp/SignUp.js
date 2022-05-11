@@ -13,6 +13,7 @@ function SignUp() {
   const [password,setPassword] = useState("");
   const [cpassword,setcPassword] = useState("")
   const PostData = (e)=>{
+    e.preventDefault();
     if(password!==cpassword){
       toast.error("Passwords do not match!", {
         position: "top-center",
@@ -23,9 +24,9 @@ function SignUp() {
       });
     }
     else {
-      e.preventDefault();
+      
       axios
-        .post("http://localhost:8080/user/signup", {
+        .post("http://localhost:8080/user/register", {
           name: name,
           email: email,
           password: password,

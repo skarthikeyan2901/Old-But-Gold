@@ -21,33 +21,37 @@ function SignUp() {
         closeOnClick: true,
         pauseOnHover: true,
       });
-      return;
     }
-    e.preventDefault();
-    axios.post("http://localhost:8080/user/signup",{name:name,email:email,password:password}).then((data)=>{
-      console.log(data);
-      if(data.data.status === 'SUCCESS') {
-        toast.success(data.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-      }
-      else{
-        toast.error(data.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-
-      }
-      
-    }).catch(err=>console.log(err))
-
+    else {
+      e.preventDefault();
+      axios
+        .post("http://localhost:8080/user/signup", {
+          name: name,
+          email: email,
+          password: password,
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.data.status === "SUCCESS") {
+            toast.success(data.data.message, {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            });
+          } else {
+            toast.error(data.data.message, {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            });
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   return (

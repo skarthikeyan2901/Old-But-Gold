@@ -87,10 +87,14 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/signin", (req, res) => {
+  console.log("HI");
   let { email, password } = req.body;
+  console.log("HI");
 
   email = email.trim();
   password = password.trim();
+  console.log(email);
+  console.log(password);
   if (email == "" || password == "") {
     res.json({
       status: "FAILED",

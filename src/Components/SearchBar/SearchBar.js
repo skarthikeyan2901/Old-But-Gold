@@ -14,7 +14,7 @@ function SearchBar() {
             onChange={event=>{setSearchTerm(event.target.value)}}
             />
             {JsonData.filter((val)=>{
-                if(searchTerm==""){
+                if(searchTerm===""){
                     return val
                 }else if(val.first_name.toLowerCase().includes(searchTerm.toLowerCase())){
                     return val

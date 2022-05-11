@@ -3,8 +3,14 @@ import { useNavigate } from 'react-router';
 import loginIcon from '../../images/userimg.jpg'
 import img from '../../images/img.png'
 import NavBar from '../../Components/NavBar/NavBar';
+import { useState } from 'react';
 function SignUp() {
   const navigate = useNavigate();
+  const [name,setName] = useState("");
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [cpassword,setcpPassword] = useState("");
+
   return (
     <div>
       <NavBar />
@@ -23,6 +29,7 @@ function SignUp() {
               <div className="mb-3" controlId="formBasicName">
                 <input
                   className="h-10 formElement"
+                  
                   type="email"
                   placeholder="Enter name"
                 />

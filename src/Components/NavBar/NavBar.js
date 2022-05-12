@@ -27,7 +27,14 @@ function NavBar() {
       <div>
         <header className="bg-purple-900 text-gray-100 sm:flex sm:justify-between">
           <div className="flex justify-between px-2 py-3">
-            <div className="ml-2 cursor-pointer" onClick={() => {navigate("/")}}>Old But Gold</div>
+            <div
+              className="ml-2 cursor-pointer"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Old But Gold
+            </div>
             <div className="sm:hidden">
               <button
                 className="block text-gray-300 hover:text-white focus:outline-none focus:text-white"
@@ -54,53 +61,62 @@ function NavBar() {
               menuIsOpen ? "block" : "hidden"
             } sm:flex sm:items-center sm:pb-0`}
           >
-            {!loggedIn ? 
-            <div className="flex space-x-8">
-            <span
-              className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Login
-            </span>
-            <span
-              className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              SignUp
-            </span>
-            </div>
-             : 
-             <div className="flex space-x-8">
-            <span
-              className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
-              onClick={() => {
-                navigate("/items");
-              }}
-            >
-              Items
-            </span>
-            <span
-              className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
-              onClick={() => {
-                navigate("/profile");
-              }}
-            >
-              Profile
-            </span>
-            <span
-              className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
-              onClick={() => {
-                localStorage.removeItem("token");
-                navigate("/");
-              }}
-            >
-              Logout
-            </span>
-            </div>}
+            {!loggedIn ? (
+              <div className="flex space-x-8">
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Login
+                </span>
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
+                  onClick={() => {
+                    navigate("/signup");
+                  }}
+                >
+                  SignUp
+                </span>
+              </div>
+            ) : (
+              <div className="flex space-x-8">
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
+                  onClick={() => {
+                    navigate("/listItem");
+                  }}
+                >
+                  List an Item
+                </span>
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
+                  onClick={() => {
+                    navigate("/feed");
+                  }}
+                >
+                  Feed
+                </span>
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
+                  Profile
+                </span>
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    navigate("/");
+                  }}
+                >
+                  Logout
+                </span>
+              </div>
+            )}
           </div>
         </header>
       </div>

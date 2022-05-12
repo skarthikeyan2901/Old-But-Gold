@@ -8,12 +8,10 @@ function SearchBar() {
     <div>
         <div className="mb-3 pt-0">
             <input type="text" placeholder="Search..." 
-            className="px-3 py-3 placeholder-slate-300 text-slate-600 
-            relative bg-white bg-white rounded text-bg border-1 shadow 
-            outline-none focus:outline-none focus:ring w-full"
+            className="p-3 w-80 placeholder-gray-700 text-slate-600 bg-slate-50 rounded text-bg shadow-md outline-none focus:outline-none focus:ring border-2"
             onChange={event=>{setSearchTerm(event.target.value)}}
             />
-            {JsonData.filter((val)=>{
+            {/* {JsonData.filter((val)=>{
                 if(searchTerm===""){
                     return val
                 }else if(val.first_name.toLowerCase().includes(searchTerm.toLowerCase())){
@@ -27,7 +25,7 @@ function SearchBar() {
                     </div>
 
                 )
-            })}
+            })} */}
         </div>
     </div>
   )

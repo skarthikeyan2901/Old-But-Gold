@@ -2,12 +2,13 @@ import Login from './Pages/Login/Login'
 import SignUp from './Pages/SignUp/SignUp';
 import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
+import Feed from './Pages/Feed/Feed';
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-import Items from './Pages/Items/Items';
+import ListItem from './Pages/ListItem/ListItem';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/items" element={<Items />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/listItem" element={<ListItem />} />
         </Routes>
       </BrowserRouter>
     </div>

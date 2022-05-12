@@ -43,3 +43,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/user',UserRouter);
+
+/*function authenticatetoken(req,res,next){
+    Bearer TOKEN
+}*/

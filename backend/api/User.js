@@ -94,8 +94,7 @@ router.post("/signin", (req, res) => {
 
   email = email.trim();
   password = password.trim();
-  console.log(email);
-  console.log(password);
+  
   if (email == "" || password == "") {
     res.json({
       status: "FAILED",
@@ -110,11 +109,10 @@ router.post("/signin", (req, res) => {
             .compare(password, hashedPassword)
             .then((result) => {
               if (result) {
-                const token = jwt.sign({
-                  name:User.name,
-                  email:User.email
-
-                },'sbksid')
+                const user = {email:email}
+                console.log(email);
+                
+                const token = jwt.sign(user,'sbksid')
                 
                 res.json({
                   status: "SUCCESS",

@@ -17,6 +17,7 @@ function Login() {
     e.preventDefault();
     axios.post("http://localhost:8080/user/signin",{email:email,password:password}).then((data)=>{
       if(data.data.status === 'SUCCESS') {
+        localStorage.setItem('token',data.data.user)
         navigate("/profile");
       }
       else{

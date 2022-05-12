@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import jwt_decode from "jwt-decode";
 
 function NavBar() {
 
     const [menuIsOpen, setMenuIsOpen] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+      const token = localStorage.getItem('token')
+      if(token){
+        const user = jwt_decode(token)
+        console.log(user)
+        if(!user){
+          localStorage.removeItem('token')
+        }
+        else {
+          setLoggedIn(true);
+        }
+      }
+    }, [])
+    
 
     return (
       <div>
@@ -33,10 +50,12 @@ function NavBar() {
             </div>
           </div>
           <div
-            className={`px-4 pb-3 space-x-8 ${
+            className={`px-4 pb-3 ${
               menuIsOpen ? "block" : "hidden"
             } sm:flex sm:items-center sm:pb-0`}
           >
+            {!loggedIn ? 
+            <div className="flex space-x-8">
             <span
               className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
               onClick={() => {
@@ -53,13 +72,16 @@ function NavBar() {
             >
               SignUp
             </span>
+            </div>
+             : 
+             <div className="flex space-x-8">
             <span
-              className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
+              className="block hover:bg-purple-600 px-2 py-1 cursor-pointer"
               onClick={() => {
-                navigate("/");
+                navigate("/items");
               }}
             >
-              Home
+              Items
             </span>
             <span
               className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
@@ -69,6 +91,16 @@ function NavBar() {
             >
               Profile
             </span>
+            <span
+              className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
+              onClick={() => {
+                localStorage.removeItem("token");
+                navigate("/");
+              }}
+            >
+              Logout
+            </span>
+            </div>}
           </div>
         </header>
       </div>

@@ -3,8 +3,20 @@ require("dotenv").config();
 const http = require("http");
 const app = express();
 const cors = require("cors");
+const bodyParser = require("body-parser")
+const cookieParser = require('cookie-parser')
 
-app.use(cors());
+const jwt = require('jsonwebtoken');
+
+
+app.use(cors({
+    ORIGIN:['http://localhost:3000'],
+    methods:['GET','POST'],
+    credentials:true
+}));
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended:false}))
+
 const PORT = process.env.PORT || 8080;
 const server = http.createServer(app);
 app.use(express.json());

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken')
 
 router.post("/register", (req, res) => {
   let { name, email, password } = req.body;
@@ -109,15 +110,24 @@ router.post("/signin", (req, res) => {
             .compare(password, hashedPassword)
             .then((result) => {
               if (result) {
+                const token = jwt.sign({
+                  name:User.name,
+                  email:User.email
+
+                },'sbksid')
+                
                 res.json({
                   status: "SUCCESS",
                   message: "Sign In Successful",
                   data: data,
+                  user:token
+                  
                 });
               } else {
                 res.json({
                   status: "FAILED",
                   message: "Invalid password entered!",
+                  
                 });
               }
             })

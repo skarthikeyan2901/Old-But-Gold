@@ -7,6 +7,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Items from './Pages/Items/Items';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/items" element={<Items />} />
         </Routes>
       </BrowserRouter>
     </div>

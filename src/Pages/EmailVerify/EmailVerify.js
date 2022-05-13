@@ -6,14 +6,22 @@ import styles from "./styles.module.css";
 import { Fragment } from "react/cjs/react.production.min";
 
 const EmailVerify = () => {
-	const [validUrl, setValidUrl] = useState(true);
+	const [validUrl, setValidUrl] = useState(false);
 	const param = useParams();
+
 
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			try {
-				const url = `http://localhost:8080/api/users/${param.id}/verify/${param.token}`;
-				const { data } = await axios.get(url);
+				const url = `http://localhost:8080/user/${param.id}/verify/${param.token}`;
+				const data = await axios
+				.get(url)
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log(err);
+				})
 				console.log(data);
 				setValidUrl(true);
 			} catch (error) {

@@ -19,7 +19,7 @@ module.exports = async(email,subject,text)=>{
             subject:subject,
             text:text
         })
-        console.log("EMail sent successfully")
+        console.log("Email sent successfully")
 
     }catch(error){
         console.log("email not sent successfully")

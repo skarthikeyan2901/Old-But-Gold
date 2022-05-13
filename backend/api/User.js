@@ -61,7 +61,7 @@ router.post("/register", async (req, res) => {
 			userId: user._id,
 			token: crypto.randomBytes(32).toString("hex"),
 		}).save();
-		const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+		const url = `${process.env.BASE_URL}user/${user.id}/verify/${token.token}`;
 		await sendEmail(user.email, "Verify Email", url);
 
 		return res.json({
@@ -81,8 +81,9 @@ router.post("/register", async (req, res) => {
 router.get("/:id/verify/:token/", async (req, res) => {
 	try {
     
-    
+    console.log("inside bro")
 		const user = await User.findOne({ _id: req.params.id });
+    console.log("User => ", user);
 		if (!user){
       return res.json({
         status:'Failed',
@@ -94,16 +95,18 @@ router.get("/:id/verify/:token/", async (req, res) => {
 			userId: user._id,
 			token: req.params.token,
 		});
+    console.log("Token => ", token)
 		if (!token){
       return res.json({
         status:'Failed',
         message:'Invalid Link!'
       })
     }
+    console.log("user verified")
 
-		await User.updateOne({ _id: user._id, verified: true });
+		await User.updateOne({ _id: user._id }, {$set: {verified: true}});
 		await token.remove();
-
+    console.log("user verified2")
 		return res.json({
       status:'Success',
       message:'Email Verified successfully!!'
@@ -313,7 +316,7 @@ router.post("/signin", async (req, res) => {
 					userId: user._id,
 					token: crypto.randomBytes(32).toString("hex"),
 				}).save();
-				const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+				const url = `${process.env.BASE_URL}user/${user.id}/verify/${token.token}`;
 				await sendEmail(user.email, "Verify Email", url);
 			}
 
@@ -322,9 +325,13 @@ router.post("/signin", async (req, res) => {
         message:"An email has been sent!Please Verify"
       })
 		}
-
-		const token = user.generateAuthToken();
-		res.status(200).send({ data: token, message: "logged in successfully" });
+    console.log("User successfully logged in")
+		// const token = user.generateAuthToken();
+    console.log("User successfully logged in")
+		res.json({
+      status:'SUCCESS',
+      message:'Successfully logged in'
+    })
   }
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });

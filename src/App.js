@@ -22,7 +22,7 @@ function App() {
           <Route path="/profile" element={<Profile/>} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/listItem" element={<ListItem />} />
-          <Route path="/users/:id/verify/:token" element={<EmailVerify />}/>
+          <Route path="/user/:id/verify/:token" element={<EmailVerify />}/>
         </Routes>
       </BrowserRouter>
     </div>

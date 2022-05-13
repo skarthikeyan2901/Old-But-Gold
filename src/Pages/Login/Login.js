@@ -18,7 +18,7 @@ function Login() {
     axios.post("http://localhost:8080/user/signin",{email:email,password:password}).then((data)=>{
       if(data.data.status === 'SUCCESS') {
         localStorage.setItem('token',data.data.user)
-        navigate("/items");
+        navigate("/feed");
       }
       else{
         toast.error(data.data.message, {

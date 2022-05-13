@@ -3,6 +3,7 @@ import SignUp from './Pages/SignUp/SignUp';
 import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
 import Feed from './Pages/Feed/Feed';
+import EmailVerify from './Pages/EmailVerify/EmailVerify';
 import {
   BrowserRouter,
   Routes,
@@ -21,6 +22,7 @@ function App() {
           <Route path="/profile" element={<Profile/>} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/listItem" element={<ListItem />} />
+          <Route path="/users/:id/verify/:token" element={<EmailVerify />}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -11,7 +11,8 @@ function SignUp() {
   const [name,setName] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const [cpassword,setcPassword] = useState("")
+  const [cpassword,setcPassword] = useState("");
+  const [msg,setmsg] = useState("");
   const PostData = (e)=>{
     e.preventDefault();
     if(password!==cpassword){

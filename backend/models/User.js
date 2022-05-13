@@ -4,11 +4,10 @@ const schema = mongoose.schema;
 const UserSchema = new mongoose.Schema({
     name:String,
     email:String,
-    username: String,
     password:String,
-    confirmPassword:String,
     phone: String,
     address: String,
+    verified:{type:Boolean,default:false}
 })
 
 const User = mongoose.model('User',UserSchema);

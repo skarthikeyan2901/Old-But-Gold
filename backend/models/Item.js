@@ -5,6 +5,7 @@ const ItemSchema = new mongoose.Schema({
     User:UserSchema,
     name:String,
     type: String,
+    daysUsed:String,
     images: Array,
 })
 

@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
-const schema = mongoose.schema;
+const Schema = mongoose.Schema;
 
 const ItemSchema = new mongoose.Schema({
-    User:UserSchema,
+    userId: {
+		type: Schema.Types.ObjectId,
+		required: false,
+		ref: "user",
+		
+	},
     name:String,
-    type: String,
+    typee: String,
     daysUsed:String,
     images: Array,
 })

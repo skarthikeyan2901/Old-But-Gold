@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser')
 
 const jwt = require('jsonwebtoken');
 
+const ItemRouter = require('./api/Item')
 
 app.use(cors({
     ORIGIN:['http://localhost:3000'],
@@ -43,6 +44,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/user',UserRouter);
+app.use('/item',ItemRouter);
 
 /*function authenticatetoken(req,res,next){
     Bearer TOKEN

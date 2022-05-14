@@ -5,7 +5,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken')
 const Token = require("../models/Token")
 const sendEmail = require('../utils/SendMail')
-const crypto = require('crypto')
+const crypto = require('crypto');
+const { data } = require("autoprefixer");
 
 
 router.post("/register", async (req, res) => {
@@ -325,12 +326,18 @@ router.post("/signin", async (req, res) => {
         message:"An email has been sent!Please Verify"
       })
 		}
+
     console.log("User successfully logged in")
 		// const token = user.generateAuthToken();
+    const userr = {email:email}
+    const token = jwt.sign(userr,'sbksid')
+    console.log(token);
     console.log("User successfully logged in")
 		res.json({
       status:'SUCCESS',
-      message:'Successfully logged in'
+      message:'Successfully logged in',
+      data:data,
+      userr:token
     })
   }
 	} catch (error) {

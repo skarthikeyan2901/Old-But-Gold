@@ -17,8 +17,11 @@ function Login() {
     e.preventDefault();
     axios.post("http://localhost:8080/user/signin",{email:email,password:password}).then((data)=>{
       if(data.data.status === 'SUCCESS') {
-        localStorage.setItem('token',data.data.user)
-        navigate("/feed");
+        console.log('hi')
+        console.log(data);
+        console.log(data.data.user);
+        localStorage.setItem('token',data.data.userr)
+        navigate("/profile");
       }
       else{
         toast.error(data.data.message, {

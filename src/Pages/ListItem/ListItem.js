@@ -1,16 +1,43 @@
 import React from "react";
 import NavBar from "../../Components/NavBar/NavBar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import {ToastContainer,toast} from 'react-toastify'
+import jwt_decode from "jwt-decode"
+import { useNavigate } from 'react-router'
 
 function ListItem() {
+  const navigate = useNavigate();
+  
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    if(!token){
+      navigate("/")
+    }
+    console.log(token);
+    if(token){
+      const user = jwt_decode(token)
+      console.log("User is");
+      console.log(user)
+      if(!user){
+        localStorage.removeItem('token')
+        navigate("/");
+      }
+    }
+    else{
+      console.log('yoyoyo')
+      navigate("/")
+    }
+  },[])
   const [name,setName] = useState("");
   const [typee,setTypee] = useState("");
   const [days,setDays] = useState("");
+  const tokenn = localStorage.getItem('token')
+  const userr = jwt_decode(tokenn);
+
   const PostData = (e)=>{
     e.preventDefault();
-    axios.post("http://localhost:8080/item/list",{name:name,typee:typee,days:days}).then((data)=>{
+    axios.post("http://localhost:8080/item/list",{name:name,typee:typee,days:days,userr}).then((data)=>{
       if(data.data.status === 'SUCCESS') {
         console.log('hi')
         console.log(data);

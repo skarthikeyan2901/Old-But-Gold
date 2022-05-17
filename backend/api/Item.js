@@ -9,11 +9,11 @@ const crypto = require('crypto');
 const { data } = require("autoprefixer");
 const Item = require('./../models/Item')
 
-router.post('/list',(req,res)=>{
-    let { name, typee, days } = req.body;
-    console.log(name);
-    console.log(typee);
-    console.log(days);
+router.post('/list',async(req,res)=>{
+   // console.log("Req body is",req.body);
+    let { name, typee, days,userr} = req.body;
+    
+    console.log("Inside Mail",req.body.userr.email)
     
     typee = typee.trim();
     days = days.trim();
@@ -24,10 +24,9 @@ router.post('/list',(req,res)=>{
         })
 
     }
-    const user = User.findOne({ _id: req.params.id });
-    console.log(user);
-    console.log("HI");
-    const newItem = new Item({
+    let user = await User.findOne({ email:req.body.userr.email});
+    console.log("User=>",user);
+    const newItem = await new Item({
         userId:user._id,
         name,
         typee,
@@ -35,7 +34,7 @@ router.post('/list',(req,res)=>{
       });
       
 
-      newItem
+      await newItem
         .save()
         .then((result) => {
           res.json({

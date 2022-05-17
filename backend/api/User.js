@@ -46,6 +46,8 @@ router.post("/register", async (req, res) => {
 		
 
 		let user = await User.findOne({ email: req.body.email });
+    console.log(user)
+    
 		if (user){
       return res.json({
         status:'Failed',

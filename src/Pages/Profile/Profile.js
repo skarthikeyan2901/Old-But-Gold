@@ -11,6 +11,7 @@ function Profile() {
     const token = localStorage.getItem('token')
     if(token){
       const user = jwt_decode(token)
+      console.log("User is");
       console.log(user)
       if(!user){
         localStorage.removeItem('token')

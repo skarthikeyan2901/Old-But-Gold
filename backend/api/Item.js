@@ -58,6 +58,11 @@ router.post("/list", upload.single("images"), async (req, res) => {
     });
 });
 
+router.get("/getItems", async (req, res) => {
+  await Item.find()
+  .then(items => res.json({items}))
+})
+
 
 module.exports = router;
 

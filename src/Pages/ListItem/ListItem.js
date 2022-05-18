@@ -32,7 +32,6 @@ function ListItem() {
   const [name,setName] = useState("");
   const [typee,setTypee] = useState("");
   const [days,setDays] = useState("");
-<<<<<<< HEAD
   const tokenn = localStorage.getItem('token')
   const userr = jwt_decode(tokenn);
 
@@ -59,48 +58,15 @@ function ListItem() {
           closeOnClick: true,
           pauseOnHover: true,
         });
-=======
-  const [images, setImages] = useState({});
-  const PostData = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:8080/item/list", {
-        name: name,
-        typee: typee,
-        days: days,
-        images: images
-      })
-      .then((data) => {
-        if (data.data.status === "SUCCESS") {
-          console.log("hi");
-          console.log(data);
->>>>>>> 933cfa5f1b667a406b25e9dfd4bc29450bb6ff68
-
-          toast.success(data.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-          });
-        } else {
-          toast.error(data.data.message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-          });
-        }
         console.log(data);
-      })
+      }})
       .catch((err) => console.log(err));
   };
 
-  const imageSelected = (img) => {
-    console.log(img);
-    setImages(img);
-  }
+  // const imageSelected = (img) => {
+  //   console.log(img);
+  //   setImages(img);
+  // }
     return (
       <div>
         <NavBar />
@@ -135,9 +101,9 @@ function ListItem() {
             <input
               type="file"
               accept=".jpg,.jpeg,.png"
-              onChange={(e) => {
-                imageSelected(e.target.images)
-              }}
+              // onChange={(e) => {
+              //   imageSelected(e.target.images)
+              // }}
               multiple="true"
               className="mt-4"
             />

@@ -6,12 +6,14 @@ const ItemSchema = new mongoose.Schema({
 		type: Schema.Types.ObjectId,
 		required: true,
 		ref: "user",
-		
 	},
-    name:String,
-    typee: String,
-    daysUsed:String,
-    images: Array,
+    name: String,
+    itemType: String,
+    daysUsed: String,
+    images: {
+        data: Buffer,
+        contentType: String,
+    }
 })
 
 const Item = mongoose.model('Item',ItemSchema);

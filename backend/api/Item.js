@@ -1,52 +1,62 @@
 const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
 const router = express.Router();
 const User = require("./../models/User");
 const Item = require('./../models/Item')
 
-router.post('/list',async(req,res)=>{
-   // console.log("Req body is",req.body);
-    let { name, typee, days,userr} = req.body;
-    
-    console.log("Inside Mail",req.body.userr.email)
-    
-    typee = typee.trim();
-    days = days.trim();
-    if(name=="" ||typee=="" || days==""){
-        res.json({
-            status:'Failed',
-            message:'Input fields Empty'
-        })
+// Using multer for disk Storage
+const storage = multer.diskStorage({
+  destination: (req, file, callBack) => {
+    callBack(null, "./uploads/");
+  },
+  filename: (req, file, callBack) => {
+    callBack(null, file.originalname);
+  },
+});
 
+const upload = multer({ storage: storage });
+
+router.post("/list", upload.single("images"), async (req, res) => {
+
+  if(req.body.name == "" || req.body.itemType.trim() == "" || req.body.days.trim() == "") {
+    res.json({
+      status: "Failed",
+      message: "Input fields Empty",
+    });
+  }
+
+  let user = await User.findOne({ email: req.body.currentUser });
+  console.log(user);
+
+  const newItem = await new Item({
+    userId: user._id,
+    name: req.body.name,
+    itemType: req.body.itemType,
+    daysUsed: req.body.days,
+    images: {
+      data: fs.readFileSync("uploads/" + req.file.filename),
+      contentType: req.file.mimetype
     }
-    let user = await User.findOne({ email:req.body.userr.email});
-    console.log("User=>",user);
-    const newItem = await new Item({
-        userId:user._id,
-        name,
-        typee,
-        days,
-      });
-      
+  });
 
-      await newItem
-        .save()
-        .then((result) => {
-          res.json({
-            status: "SUCCESS",
-            message: "Data Stored successfully",
-            data: result,
-          });
-        })
-        .catch((err) => {
-            console.log(err);
-          res.json({
-            status: "FAILED",
-            message: "Error while saving user",
-          });
-        });
-    
-    
-})
+  await newItem
+    .save()
+    .then((result) => {
+      res.json({
+        status: "SUCCESS",
+        message: "Data Stored successfully",
+        data: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({
+        status: "FAILED",
+        message: "Error while saving user",
+      });
+    });
+});
 
 
 module.exports = router;

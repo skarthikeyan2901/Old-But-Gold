@@ -8,65 +8,78 @@ import { useNavigate } from 'react-router'
 
 function ListItem() {
   const navigate = useNavigate();
+  const [name,setName] = useState("");
+  const [itemType,setItemType] = useState("");
+  const [days,setDays] = useState("");
+  const [images, setImages] = useState({});
+  const [currentUser, setCurrentUser] = useState("");
+  const token = localStorage.getItem('token')
+  // const currentUser = jwt_decode(token);
   
-  useEffect(()=>{
-    const token = localStorage.getItem('token')
-    if(!token){
-      navigate("/")
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
     }
     console.log(token);
-    if(token){
-      const user = jwt_decode(token)
-      console.log("User is");
-      console.log(user)
-      if(!user){
-        localStorage.removeItem('token')
+    if (token) {
+      const user = jwt_decode(token);
+      console.log(user);
+      if (!user) {
+        localStorage.removeItem("token");
         navigate("/");
       }
+      else {
+        setCurrentUser(user.email);
+        console.log(user.email)
+      }
+    } else {
+      console.log("yoyoyo");
+      navigate("/");
     }
-    else{
-      console.log('yoyoyo')
-      navigate("/")
-    }
-  },[])
-  const [name,setName] = useState("");
-  const [typee,setTypee] = useState("");
-  const [days,setDays] = useState("");
-  const tokenn = localStorage.getItem('token')
-  const userr = jwt_decode(tokenn);
+  }, []);
 
   const PostData = (e)=>{
     e.preventDefault();
-    axios.post("http://localhost:8080/item/list",{name:name,typee:typee,days:days,userr}).then((data)=>{
-      if(data.data.status === 'SUCCESS') {
-        console.log('hi')
-        console.log(data);
-        
-        toast.success(data.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        })
-      }
-      else{
-        toast.error(data.data.message, {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-        });
-        console.log(data);
-      }})
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('itemType', itemType);
+    formData.append('days', days);
+    formData.append('currentUser', currentUser);
+    formData.append('images', images);
+
+    axios
+      .post("http://localhost:8080/item/list", formData)
+      .then((data) => {
+        if (data.data.status === "SUCCESS") {
+          console.log("hi");
+          console.log(data);
+
+          toast.success(data.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        } else {
+          toast.error(data.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+          console.log(data);
+        }
+      })
       .catch((err) => console.log(err));
   };
 
-  // const imageSelected = (img) => {
-  //   console.log(img);
-  //   setImages(img);
-  // }
+  const imageSelected = (img) => {
+    console.log(img);
+    setImages(img);
+  }
     return (
       <div>
         <NavBar />
@@ -86,9 +99,9 @@ function ListItem() {
               type="text"
               className="formElement mt-4"
               placeholder="Enter type of item"
-              name="typee"
-              onChange={(e) => setTypee(e.target.value)}
-              value={typee}
+              name="itemType"
+              onChange={(e) => setItemType(e.target.value)}
+              value={itemType}
             />
             <input
               type="text"
@@ -101,10 +114,10 @@ function ListItem() {
             <input
               type="file"
               accept=".jpg,.jpeg,.png"
-              // onChange={(e) => {
-              //   imageSelected(e.target.images)
-              // }}
-              multiple="true"
+              onChange={(e) => {
+                imageSelected(e.target.files[0])
+              }}
+              // multiple="true"
               className="mt-4"
             />
             <div className="mt-4 flex justify-center">

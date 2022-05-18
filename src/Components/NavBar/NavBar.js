@@ -110,6 +110,7 @@ function NavBar() {
                   className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
                   onClick={() => {
                     localStorage.removeItem("token");
+                    setLoggedIn(false);
                     navigate("/");
                   }}
                 >

@@ -32,6 +32,7 @@ function ListItem() {
   const [name,setName] = useState("");
   const [typee,setTypee] = useState("");
   const [days,setDays] = useState("");
+<<<<<<< HEAD
   const tokenn = localStorage.getItem('token')
   const userr = jwt_decode(tokenn);
 
@@ -58,10 +59,47 @@ function ListItem() {
           closeOnClick: true,
           pauseOnHover: true,
         });
+=======
+  const [images, setImages] = useState({});
+  const PostData = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/item/list", {
+        name: name,
+        typee: typee,
+        days: days,
+        images: images
+      })
+      .then((data) => {
+        if (data.data.status === "SUCCESS") {
+          console.log("hi");
+          console.log(data);
+>>>>>>> 933cfa5f1b667a406b25e9dfd4bc29450bb6ff68
 
-      }
-      console.log(data)
-    }).catch(err=>console.log(err))
+          toast.success(data.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        } else {
+          toast.error(data.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+          });
+        }
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const imageSelected = (img) => {
+    console.log(img);
+    setImages(img);
   }
     return (
       <div>
@@ -75,7 +113,7 @@ function ListItem() {
               className="formElement mt-4"
               placeholder="Enter name of item"
               name="name"
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               value={name}
             />
             <input
@@ -83,7 +121,7 @@ function ListItem() {
               className="formElement mt-4"
               placeholder="Enter type of item"
               name="typee"
-              onChange={(e)=>setTypee(e.target.value)}
+              onChange={(e) => setTypee(e.target.value)}
               value={typee}
             />
             <input
@@ -91,13 +129,23 @@ function ListItem() {
               className="formElement mt-4"
               placeholder="Enter days used"
               name="days"
-              onChange={(e)=>setDays(e.target.value)}
+              onChange={(e) => setDays(e.target.value)}
               value={days}
             />
-            <input type="file" className="mt-4" />
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              onChange={(e) => {
+                imageSelected(e.target.images)
+              }}
+              multiple="true"
+              className="mt-4"
+            />
             <div className="mt-4 flex justify-center">
-              <button className="w-72 h-12 text-blue-700 outline outline-1 hover:outline-2 outline-blue-500 text-lg hover:bg-blue-500 hover:text-white rounded-sm"
-              onClick={PostData}>
+              <button
+                className="w-72 h-12 text-blue-700 outline outline-1 hover:outline-2 outline-blue-500 text-lg hover:bg-blue-500 hover:text-white rounded-sm"
+                onClick={PostData}
+              >
                 Submit
               </button>
             </div>

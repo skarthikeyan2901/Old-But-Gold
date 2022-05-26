@@ -24,7 +24,7 @@ function ItemCard({ item }) {
 
     return (
       <div className="bg-gray-100 rounded-lg w-64 shadow-md">
-        <img src={noImageSrc} alt="No image"></img>
+        <img src={item.images} alt="No image"></img>
         <div className="p-2">
           <div className="pb-2">
             <div className="text-xl">{item.name}</div>

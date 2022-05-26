@@ -10,10 +10,11 @@ const ItemSchema = new mongoose.Schema({
     name: String,
     itemType: String,
     daysUsed: String,
-    images: {
-        data: Buffer,
-        contentType: String,
-    }
+    // images: {
+    //     data: Buffer,
+    //     contentType: String,
+    // }
+    images: String,
 })
 
 const Item = mongoose.model('Item',ItemSchema);

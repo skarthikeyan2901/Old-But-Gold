@@ -3,6 +3,7 @@ const multer = require("multer");
 const router = express.Router();
 const User = require("./../models/User");
 const Item = require('./../models/Item');
+const jwt_decode = require("jwt-decode")
 
 const uploadtoAzure = require('../azure/fileUpload');
 
@@ -26,7 +27,7 @@ router.post("/list", upload.single("images"), async (req, res) => {
   let today = new Date();
 
   const newItem = await new Item({
-    userId: user._id,
+    userId: user.email,
     name: req.body.name,
     itemType: req.body.itemType,
     daysUsed: req.body.days,
@@ -61,7 +62,7 @@ router.get("/getItems", async (req, res) => {
 
 router.post("/issueItem", async (req, res) => {
   let user = await User.findOne({ email: req.body.user });
-  await Item.findOneAndUpdate({ _id: req.body.itemId }, {$set: {issued: true, issueTo: user._id}})
+  await Item.findOneAndUpdate({ _id: req.body.itemId }, {$set: {issued: true, issueTo: user.email}})
   .then(() => {
     res.json({
       status: "SUCCESS",
@@ -74,6 +75,33 @@ router.post("/issueItem", async (req, res) => {
       message: "Error while obtaining item! Try again!"
     })
   })
+})
+
+router.post("/profile",async(req,res)=>{
+  let token = req.body.token;
+  //console.log(token);
+  let decoded = jwt_decode(token);
+  let email = decoded.email;
+  let sold_items = await Item.find({userId:email},{name:1,_id:0});
+  //console.log(sold_items);
+  return res.json({
+    data:sold_items
+  })
+
+
+})
+
+router.post("/getItem",async(req,res)=>{
+  let token = req.body.token;
+  console.log(token);
+  let decoded = jwt_decode(token);
+  let email = decoded.email;
+  let get_item = await Item.find({issueTo:email,issued:true},{name:1,_id:0});
+  console.log(get_item,"Item Got");
+  return res.json({
+    data:get_item
+  })
+  
 })
 
 

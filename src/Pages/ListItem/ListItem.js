@@ -13,8 +13,6 @@ function ListItem() {
   const [days,setDays] = useState("");
   const [images, setImages] = useState({});
   const [currentUser, setCurrentUser] = useState("");
-  const token = localStorage.getItem('token')
-  // const currentUser = jwt_decode(token);
   
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,7 +32,6 @@ function ListItem() {
         console.log(user.email)
       }
     } else {
-      console.log("yoyoyo");
       navigate("/");
     }
   }, []);
@@ -92,6 +89,7 @@ function ListItem() {
               className="formElement mt-4"
               placeholder="Enter name of item"
               name="name"
+              required="true"
               onChange={(e) => setName(e.target.value)}
               value={name}
             />
@@ -100,6 +98,7 @@ function ListItem() {
               className="formElement mt-4"
               placeholder="Enter type of item"
               name="itemType"
+              required="true"
               onChange={(e) => setItemType(e.target.value)}
               value={itemType}
             />
@@ -108,6 +107,7 @@ function ListItem() {
               className="formElement mt-4"
               placeholder="Enter days used"
               name="days"
+              required="true"
               onChange={(e) => setDays(e.target.value)}
               value={days}
             />
@@ -115,8 +115,9 @@ function ListItem() {
               type="file"
               accept=".jpg,.jpeg,.png"
               onChange={(e) => {
-                imageSelected(e.target.files[0])
+                imageSelected(e.target.files[0]);
               }}
+              required="true"
               // multiple="true"
               className="mt-4"
             />

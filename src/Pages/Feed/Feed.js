@@ -38,13 +38,13 @@ function Feed() {
   }, []);
 
   return (
-    <div>
+    <div className="pb-10">
       <NavBar />
       <div className="flex justify-center pt-6">
         <SearchBar />
       </div>
-      <div className="flex justify-center">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-24 p-6">
+      <div className="flex justify-center container mx-auto">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-24 pt-6">
           {items.map((item) => {
             return <ItemCard item={item} />
           })}

@@ -42,9 +42,6 @@ router.post("/register", async (req, res) => {
     });
   }
   else{
-
-		
-
 		let user = await User.findOne({ email: req.body.email });
     console.log(user)
     
@@ -68,8 +65,8 @@ router.post("/register", async (req, res) => {
 		await sendEmail(user.email, "Verify Email", url);
 
 		return res.json({
-      status:'Pending',
-      message:'Please verify your email!'
+      status:'SUCCESS',
+      message:'Sign up successful! Please verify your email to continue!'
     })
   }
 	} catch (error) {
@@ -121,9 +118,7 @@ router.get("/:id/verify/:token/", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
 	try {
-    console.log("HI");
   let { email, password } = req.body;
-  console.log("HI");
 
   email = email.trim();
   password = password.trim();
@@ -135,8 +130,6 @@ router.post("/signin", async (req, res) => {
     });
   }
   else{
-		
-
 		const user = await User.findOne({ email: req.body.email });
 		if (!user){
 			return res.json({
@@ -154,10 +147,7 @@ router.post("/signin", async (req, res) => {
         status:'Failed',
         message:'Invalid Email or Password'
       })
-
     }
-			
-
 		if (!user.verified) {
 			let token = await Token.findOne({ userId: user._id });
 			if (!token) {

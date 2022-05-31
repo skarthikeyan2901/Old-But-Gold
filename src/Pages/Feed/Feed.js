@@ -10,6 +10,8 @@ import axios from "axios";
 function Feed() {
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
+  const [user, setUser] = useState();
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     axios
@@ -21,16 +23,19 @@ function Feed() {
       .catch((err) => {
         console.log(err);
       })
-  }, [])
+  }, [reload])
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      const user = jwt_decode(token);
-      console.log(user);
-      if (!user) {
+      let tempUser = jwt_decode(token);
+      console.log(tempUser);
+      if (!tempUser) {
         localStorage.removeItem("token");
         navigate("/");
+      }
+      else {
+        setUser(tempUser);
       }
     } else {
       navigate("/");
@@ -46,7 +51,7 @@ function Feed() {
       <div className="flex justify-center container mx-auto">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-24 pt-6">
           {items.map((item) => {
-            return <ItemCard item={item} />
+            return <ItemCard item={item} user={user} reload={reload} setReload={setReload} />
           })}
         </div>
       </div>

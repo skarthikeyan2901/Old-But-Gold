@@ -59,6 +59,23 @@ router.get("/getItems", async (req, res) => {
   .then(items => res.json({items}))
 })
 
+router.post("/issueItem", async (req, res) => {
+  let user = await User.findOne({ email: req.body.user });
+  await Item.findOneAndUpdate({ _id: req.body.itemId }, {$set: {issued: true, issueTo: user._id}})
+  .then(() => {
+    res.json({
+      status: "SUCCESS",
+      message: "Succesfully obtained item!"
+    })
+  })
+  .catch(() => {
+    res.json({
+      status: "Failed",
+      message: "Error while obtaining item! Try again!"
+    })
+  })
+})
+
 
 module.exports = router;
 

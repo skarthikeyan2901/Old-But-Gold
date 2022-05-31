@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-function ItemCard({ item }) {
+function ItemCard({ item, user, reload, setReload }) {
 
   const [modal, setModal] = useState(false);
+  // console.log(item)
 
     const noImageSrc =
       "https://ik.imagekit.io/uu9zwft992t/OldButGold/no-image_52h6-Z8NY.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652348788533";
@@ -19,7 +22,36 @@ function ItemCard({ item }) {
     datePosted = tempDate.join("/");
 
     const obtainItem = () => {
-      
+      axios
+        .post("http://localhost:8080/item/issueItem", {
+          itemId: item._id,
+          user: user.email,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.status === "SUCCESS") {
+            toast.success(res.data.message, {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            });
+          } else {
+            toast.error(res.data.message, {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+            });
+          }
+          setModal(false);
+          setReload(!reload);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     return (
@@ -30,6 +62,7 @@ function ItemCard({ item }) {
             "linear-gradient(to bottom right, #ffffff 0%, #cc66ff 501%)",
         }}
       >
+        <ToastContainer />
         <div className="p-2">
           <img
             src={imageSrc}
@@ -119,7 +152,7 @@ function ItemCard({ item }) {
                   data-modal-toggle="popup-modal"
                   onClick={obtainItem}
                   type="button"
-                  className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                  className="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
                 >
                   Yes, I'm sure
                 </button>

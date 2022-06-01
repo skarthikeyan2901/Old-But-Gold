@@ -12,6 +12,7 @@ function Feed() {
   const [items, setItems] = useState([]);
   const [user, setUser] = useState();
   const [reload, setReload] = useState(false);
+  const arr = ["Hi","How are you"];
 
   useEffect(() => {
     axios
@@ -36,6 +37,7 @@ function Feed() {
       }
       else {
         setUser(tempUser);
+        console.log("Hi",tempUser.emailin);
       }
     } else {
       navigate("/");

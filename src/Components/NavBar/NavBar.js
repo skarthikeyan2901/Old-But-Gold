@@ -6,12 +6,18 @@ function NavBar() {
 
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
+    const [name,setName] = useState("");
     const navigate = useNavigate();
+    //const [reload,setReload] = false;
+    const [username,setusername] = useState();
 
+    
+    
     useEffect(() => {
       const token = localStorage.getItem('token')
       if(token){
         const user = jwt_decode(token)
+        setusername(user);
         console.log(user)
         if(!user){
           localStorage.removeItem('token')
@@ -104,8 +110,9 @@ function NavBar() {
                     navigate("/profile");
                   }}
                 >
-                  Profile
+                  {username.email}
                 </span>
+                
                 <span
                   className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
                   onClick={() => {

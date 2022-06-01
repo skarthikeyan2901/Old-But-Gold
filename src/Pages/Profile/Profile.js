@@ -117,15 +117,15 @@ function Profile() {
           <h1 className='text-gray-600 font-semibold text-xl mt-5'>Items Donated:</h1>
           <div className=" flex pt-6">
           {things.map((item) => {
-            return <h1>{item.name},</h1>
+            return <h1>{item.name}, </h1>
           })}
           </div>
         </div>
         <div className='grid rows-2 grid-flow-col gap-2 flex-justify'>
-          <h1 className='text-gray-600 font-semibold text-xl mt-5'>Items Donated:</h1>
-          <div className=" flex pt-6">
+          <h1 className='text-gray-600 font-semibold text-xl mt-5'>Items Bought:</h1>
+          <div className=" flex pt-6 gap-y-10 gap-x-24">
           {issued.map((item) => {
-            return <h1>{item.name},</h1>
+            return <h1>{item.name}, </h1>
           })}
           </div>
         </div>

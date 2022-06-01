@@ -12,6 +12,8 @@ function SignUp() {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [cpassword,setcPassword] = useState("");
+  const [phone,setPhone] = useState("");
+  const [address,setAddress] = useState("");
   const [msg,setmsg] = useState("");
   const PostData = (e)=>{
     e.preventDefault();
@@ -30,6 +32,8 @@ function SignUp() {
         .post("http://localhost:8080/user/register", {
           name: name,
           email: email,
+          phone:phone,
+          address:address,
           password: password,
         })
         .then((data) => {
@@ -92,6 +96,17 @@ function SignUp() {
                   placeholder="Enter email"
                 />
               </div>
+              <div className="mb-3" controlId="formBasicPhone">
+                <input
+                  className="h-10 formElement"
+                  name='phone'
+                  value={phone}
+                  onChange={(e)=>setPhone(e.target.value)}
+                  type="text"
+                  placeholder="Enter Phone no"
+                />
+              </div>
+              
               <div className="mb-3" controlId="formBasicPassword">
                 <input
                   className="h-10 formElement"
@@ -110,6 +125,16 @@ function SignUp() {
                   onChange={(e)=>setcPassword(e.target.value)}
                   type="password"
                   placeholder="Confirm password"
+                />
+              </div>
+              <div className="mb-3" controlId="formBasicAddress">
+                <input
+                  className="h-10 formElement"
+                  name='address'
+                  value={address}
+                  onChange={(e)=>setAddress(e.target.value)}
+                  type="textarea"
+                  placeholder="Enter Address"
                 />
               </div>
               <div className="grid gap-2">

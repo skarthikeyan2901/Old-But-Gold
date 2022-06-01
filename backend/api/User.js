@@ -27,7 +27,7 @@ router.post("/profile",async(req,res)=>{
 
 router.post("/register", async (req, res) => {
 	try {
-    let { name, email, password } = req.body;
+    let { name, email,phone,address, password } = req.body;
   console.log(name);
   console.log(email);
   console.log(password);
@@ -35,13 +35,30 @@ router.post("/register", async (req, res) => {
   name = name.trim();
   email = email.trim();
   password = password.trim();
+  phone = phone.trim();
+  console.log(phone);
+  console.log(phone.length)
 
-  if (name == "" || email == "" || password == "") {
+  if (name == "" || email == "" || password == ""||phone=="" || address=="") {
     res.json({
       status: "FAILED",
       message: "Empty input fields!",
     });
-  } else if (!/^[a-zA-z]*$/.test(name)) {
+  }else if(phone.length != 10){
+    res.json({
+      status:'Failed',
+      message:'Invalid Phone no'
+    })
+
+  }
+  else if(address.length < 10 || address.length > 100){
+    res.json({
+      status:'Failed',
+      message:'Address Length must be between 10 and 100 characters'
+    })
+    
+  }
+   else if (!/^[a-zA-z]*$/.test(name)) {
     res.json({
       status: "FAILED",
       message: "Invalid Name!",

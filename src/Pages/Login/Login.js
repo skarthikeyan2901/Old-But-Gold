@@ -21,7 +21,7 @@ function Login() {
         console.log(data);
         console.log(data.data.user);
         localStorage.setItem('token',data.data.userr)
-        navigate("/profile");
+        navigate("/feed");
       }
       else{
         toast.error(data.data.message, {

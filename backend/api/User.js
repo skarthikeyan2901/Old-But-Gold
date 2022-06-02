@@ -9,7 +9,7 @@ const crypto = require('crypto');
 const { data } = require("autoprefixer");
 const jwt_decode = require("jwt-decode")
 
-router.post("/profile",async(req,res)=>{
+router.post("/profile", async (req, res) => {
   console.log(req.body);
   let token = req.body.token;
   console.log(token);
@@ -17,12 +17,9 @@ router.post("/profile",async(req,res)=>{
   let email = decoded.email;
   let user = await User.findOne({ email: email });
   return res.json({
-    data:user
-
-  })
-
-
-})
+    data: user,
+  });
+});
 
 
 router.post("/register", async (req, res) => {

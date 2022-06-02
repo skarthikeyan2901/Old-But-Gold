@@ -2,7 +2,7 @@
 @tailwind components;
 
 .formElement {
-  @apply block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-300 rounded;
+  @apply block appearance-none w-full mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-300 px-3 py-2 gap-x-3 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500;
 }
 
 @tailwind utilities;

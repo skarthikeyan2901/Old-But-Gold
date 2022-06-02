@@ -101,41 +101,44 @@ function Profile() {
   return (
     <div>
       <NavBar />
-      <div className='flex items-center justify-center'>
-        <div className='bg-slate-100 w-1/2 h-1/2 mt-10 rounded-lg'>
-          <div className='flex items-center justify-center pt-10 flex-col'>
-          <img src={user_img}
-          alt=""
-          className='rounded-full w-32 ' />
-          <h1 className='text-gray-800 font-semibold text-xl mt-5'>{name}</h1>
-          <h1 className='text-gray-400 font-semibold text-xl mt-5'>{email}</h1>
-          <h1 className='text-gray-800 font-semibold text-xl mt-5'>{phone}</h1>
-          <h1 className='text-gray-800 font-semibold text-xl mt-5'>{address}</h1>
-          <div className='grid rows-2 grid-flow-col gap-2 flex-justify'>
-          <h1 className='text-gray-600 font-semibold text-xl mt-5'>Items Donated:</h1>
-          <div className=" flex pt-6">
-          {things.map((item) => {
-            return <h1>{item.name}, </h1>
-          })}
-          </div>
-        </div>
-        <div className='grid rows-2 grid-flow-col gap-2 flex-justify'>
-          <h1 className='text-gray-600 font-semibold text-xl mt-5'>Items Bought:</h1>
-          <div className=" flex pt-6 gap-y-10 gap-x-24">
-          {issued.map((item) => {
-            return <h1>{item.name}, </h1>
-          })}
-          </div>
-        </div>
-        
-          
+      <div className="flex items-center justify-center">
+        <div className="bg-slate-100 w-1/2 h-1/2 mt-10 rounded-lg pb-6">
+          <div className="flex items-center justify-center pt-10 flex-col">
+            <img src={user_img} alt="" className="rounded-full w-32 " />
+            <h1 className="text-gray-800 font-semibold text-xl mt-5">{name}</h1>
+            <h1 className="text-gray-400 font-semibold text-xl mt-5">
+              {email}
+            </h1>
+            <h1 className="text-gray-800 font-semibold text-xl mt-5">
+              {phone}
+            </h1>
+            <h1 className="text-gray-800 font-semibold text-xl mt-5">
+              {address}
+            </h1>
+            <div className="grid rows-2 grid-flow-col gap-2 flex-justify">
+              <h1 className="text-gray-600 font-semibold text-xl mt-5">
+                Items Donated:
+              </h1>
+              <div className=" flex pt-6">
+                {things.map((item) => {
+                  return <h1>{item.name}, </h1>;
+                })}
+              </div>
+            </div>
+            <div className="grid rows-2 grid-flow-col gap-2 flex-justify">
+              <h1 className="text-gray-600 font-semibold text-xl mt-5">
+                Items Bought:
+              </h1>
+              <div className=" flex pt-6 gap-y-10 gap-x-24">
+                {issued.map((item) => {
+                  return <h1>{item.name}, </h1>;
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
-        
     </div>
-    
   );
 }
 

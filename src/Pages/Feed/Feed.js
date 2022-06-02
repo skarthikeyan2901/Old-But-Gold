@@ -45,7 +45,7 @@ function Feed() {
   }, []);
 
   return (
-    <div className="pb-10">
+    <div className="pb-10 bg-gray-100">
       <NavBar />
       <div className="flex justify-center pt-6">
         <SearchBar />

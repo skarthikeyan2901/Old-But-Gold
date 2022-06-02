@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router";
-
+import icon from "../../images/donate.webp"
 function ListItem() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -90,7 +90,8 @@ function ListItem() {
           List an Item
         </div>
         <div className="flex py-8 justify-center">
-          <form class="bg-white py-8 px-6 shadow rounded-lg sm:px-10 animate-pulse animation-iteration-count: 1">
+          
+          <form action="" class="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
             <input
               type="text"
               className="formElement mt-4 w-full border border-gray-300 px-3 py-2 gap-x-3 rounded-lg shadow-sm

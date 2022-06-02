@@ -7,16 +7,12 @@ import user_img from "../../images/man.jpg";
 import axios from "axios";
 function Profile() {
   const navigate = useNavigate();
-  const [reload, setReload] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  //const [bought_items, bought_setItems] = useState([]);
-  const [things, setThings] = useState(["None"]);
-  let bought_items = [];
-  const arr = ["hi", "how are you"];
-  const [issued, setIssued] = useState(["None"]);
+  const [things, setThings] = useState([]);
+  const [issued, setIssued] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,14 +22,7 @@ function Profile() {
         token,
       })
       .then((res) => {
-        //console.log("Response is",res);
-        //console.log(res.data);
         setThings(res.data.data);
-        //console.log("Things",things);
-
-        // console.log("Data is",res.data.data);
-        // bought_setItems(res.data.data);
-        // console.log("Items is",bought_items)
       })
       .catch((err) => {
         console.log(err);
@@ -52,10 +41,6 @@ function Profile() {
         console.log(res.data);
         setIssued(res.data.data);
         console.log("Issue", issued);
-
-        // console.log("Data is",res.data.data);
-        // bought_setItems(res.data.data);
-        // console.log("Items is",bought_items)
       })
       .catch((err) => {
         console.log(err);
@@ -64,7 +49,6 @@ function Profile() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    //console.log(token);
     axios
       .post("http://localhost:8080/user/profile", {
         token,
@@ -74,10 +58,6 @@ function Profile() {
         setEmail(res.data.data.email);
         setPhone(res.data.data.phone);
         setAddress(res.data.data.address);
-        //console.log(name);
-        //console.log(email);
-
-        //setItems(res.data.items);
       })
       .catch((err) => {
         console.log(err);
@@ -119,9 +99,9 @@ function Profile() {
               <h1 className="text-gray-600 font-semibold text-xl mt-5">
                 Items Donated:
               </h1>
-              <div className=" flex pt-6">
+              <div className="flex pt-6 gap-y-4 gap-x-2">
                 {things.map((item) => {
-                  return <h1>{item.name}, </h1>;
+                  return <span>{item.name}, </span>;
                 })}
               </div>
             </div>
@@ -129,9 +109,9 @@ function Profile() {
               <h1 className="text-gray-600 font-semibold text-xl mt-5">
                 Items Bought:
               </h1>
-              <div className=" flex pt-6 gap-y-10 gap-x-24">
+              <div className="flex pt-6 gap-y-4 gap-x-2">
                 {issued.map((item) => {
-                  return <h1>{item.name}, </h1>;
+                  return <span>{item.name}, </span>;
                 })}
               </div>
             </div>

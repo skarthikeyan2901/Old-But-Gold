@@ -7,6 +7,7 @@ import user_img from "../../images/man.jpg";
 import axios from "axios";
 function Profile() {
   const navigate = useNavigate();
+  const [reload, setReload] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");

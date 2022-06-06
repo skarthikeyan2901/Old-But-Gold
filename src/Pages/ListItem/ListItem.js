@@ -36,6 +36,7 @@ function ListItem() {
   }, []);
 
   const PostData = (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
@@ -43,6 +44,7 @@ function ListItem() {
     formData.append("days", days);
     formData.append("currentUser", currentUser);
     formData.append("images", images);
+    formData.append("token",token);
 
     axios
       .post("http://localhost:8080/item/list", formData)

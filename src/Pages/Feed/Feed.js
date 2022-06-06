@@ -15,8 +15,9 @@ function Feed() {
   const arr = ["Hi","How are you"];
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8080/item/getItems")
+      .get("http://localhost:8080/item/getItems",token)
       .then((res) => {
         console.log(res.data.items);
         setItems(res.data.items);

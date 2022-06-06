@@ -12,6 +12,13 @@ const jwt_decode = require("jwt-decode")
 router.post("/profile", async (req, res) => {
   console.log(req.body);
   let token = req.body.token;
+  if(!token){
+    return res.json({
+      status:'Failed',
+      data:'None',
+      message:'Not aunthenticated!'
+    })
+  }
   console.log(token);
   let decoded = jwt_decode(token);
   let email = decoded.email;

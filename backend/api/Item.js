@@ -12,6 +12,16 @@ const upload = multer({ storage: multer.memoryStorage() });
 const baseImageUrl = "https://obgimages.blob.core.windows.net/obg-container/";
 
 router.post("/list", upload.single("images"), async (req, res) => {
+  console.log(req.body);
+
+  let token = req.body.token;
+  console.log(token);
+  if(!token){
+    return res.json({
+      status:'Failed',
+      message:'Not aunthenticated'
+    })
+  }
 
   if(req.body.name == "" || req.body.itemType.trim() == "" || req.body.days.trim() == "") {
     res.json({
@@ -56,6 +66,14 @@ router.post("/list", upload.single("images"), async (req, res) => {
 });
 
 router.get("/getItems", async (req, res) => {
+  let token = req.body.token;
+  if(!token){
+    return res.json({
+      status:'Failed',
+      message:'User not aunthenticated'
+
+    })
+  }
   await Item.find()
   .then(items => res.json({items}))
 })
@@ -80,6 +98,12 @@ router.post("/issueItem", async (req, res) => {
 router.post("/profile",async(req,res)=>{
   let token = req.body.token;
   //console.log(token);
+  if(!token){
+    return res.json({
+      status:'Failed',
+      message:'Not aunthenticated!'
+    })
+  }
   let decoded = jwt_decode(token);
   let email = decoded.email;
   let sold_items = await Item.find({userId:email},{name:1,_id:0});
@@ -93,6 +117,12 @@ router.post("/profile",async(req,res)=>{
 
 router.post("/getItem",async(req,res)=>{
   let token = req.body.token;
+  if(!token){
+    return res.json({
+      status:'Failed',
+      message:'Not aunthenticated'
+    })
+  }
   console.log(token);
   let decoded = jwt_decode(token);
   let email = decoded.email;

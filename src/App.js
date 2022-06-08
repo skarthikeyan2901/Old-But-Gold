@@ -12,6 +12,7 @@ const ListItem = lazy(() => import("./Pages/ListItem/ListItem"));
 const Profile = lazy(() => import("./Pages/Profile/Profile"));
 const Feed = lazy(() => import("./Pages/Feed/Feed"));
 const EmailVerify = lazy(() => import("./Pages/EmailVerify/EmailVerify"));
+const Notifications = lazy(() => import("./Pages/Notifications/Notifications"));
 
 function AllRoutes() {
 
@@ -40,6 +41,7 @@ function AllRoutes() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/listItem" element={<ListItem />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/user/:id/verify/:token" element={<EmailVerify />} />
         </Routes>
       </Suspense>

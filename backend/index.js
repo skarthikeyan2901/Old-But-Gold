@@ -8,7 +8,9 @@ const cookieParser = require('cookie-parser')
 
 const jwt = require('jsonwebtoken');
 
-const ItemRouter = require('./api/Item')
+const ItemRouter = require('./api/Item');
+const UserRouter = require('./api/User');
+const NotificationRouter = require('./api/Notification');
 
 app.use(cors({
     ORIGIN:['http://localhost:3000'],
@@ -22,7 +24,6 @@ const PORT = process.env.PORT || 8080;
 const server = http.createServer(app);
 app.use(express.json());
 const mongoose = require("mongoose");
-const UserRouter = require('./api/User');
 mongoose
     .connect(process.env.MONGOURI, {
         useNewUrlParser: true,
@@ -45,6 +46,7 @@ app.get('/',(req,res)=>{
 
 app.use('/user',UserRouter);
 app.use('/item',ItemRouter);
+app.use("/notification", NotificationRouter);
 
 /*function authenticatetoken(req,res,next){
     Bearer TOKEN

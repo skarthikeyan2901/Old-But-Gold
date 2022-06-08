@@ -112,7 +112,16 @@ function NavBar() {
                 >
                   {username.email}
                 </span>
-                
+
+                <span
+                  className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
+                  onClick={() => {
+                    navigate("/notifications");
+                  }}
+                >
+                  Notifications
+                </span>
+
                 <span
                   className="block hover:bg-purple-600 px-2 py-1 mt-1 sm:mt-0 cursor-pointer"
                   onClick={() => {

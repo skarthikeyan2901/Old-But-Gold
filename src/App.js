@@ -26,7 +26,7 @@ function AllRoutes() {
               alignItems: "center",
               height: "100vh",
               backgroundColor: "#F3F4F6",
-              color: "#35281E",
+              color: "#5B21B6",
             }}
           >
             <MoonLoader color="#000000" size={80} />

@@ -95,31 +95,42 @@ router.get("/getItems", async (req, res) => {
 router.post("/issueItem", async (req, res) => {
   let user = await User.findOne({ email: req.body.user });
   let itemInFocus = await Item.findOne({ _id: req.body.itemId })
-  let owner = await User.findOne({ email: itemInFocus.userId })
-  await Item.findOneAndUpdate({ _id: req.body.itemId }, {$set: {issued: true, issueTo: user.email}})
-  .then(async () => {
-    let msg = `You have successfully obtained ${itemInFocus.name} from ${itemInFocus.userId}.\nPlease contact the user for further details on how to obtain the item.\nPhone: ${owner.phone}\nAddress: ${owner.address}`;
-    let today = new Date();
-    const newNotif = await new Notification({
-      userId: user.email,
-      message: msg,
-      notificationType: "Success",
-      notificationDate: today,
-    })
-
-    await newNotif.save()
-
-    res.json({
-      status: "SUCCESS",
-      message: "Succesfully obtained item!"
-    })
-  })
-  .catch(() => {
+  if(itemInFocus.issued == true) {
     res.json({
       status: "Failed",
-      message: "Error while obtaining item! Try again!"
+      message: "Item already obtained by other user!"
     })
-  })
+  }
+  else {
+    let owner = await User.findOne({ email: itemInFocus.userId });
+    await Item.findOneAndUpdate(
+      { _id: req.body.itemId },
+      { $set: { issued: true, issueTo: user.email } }
+    )
+      .then(async () => {
+        let msg = `You have successfully obtained ${itemInFocus.name} from ${itemInFocus.userId}.\nPlease contact the user for further details on how to obtain the item.\nPhone: ${owner.phone}\nAddress: ${owner.address}`;
+        let today = new Date();
+        const newNotif = await new Notification({
+          userId: user.email,
+          message: msg,
+          notificationType: "Success",
+          notificationDate: today,
+        });
+
+        await newNotif.save();
+
+        res.json({
+          status: "SUCCESS",
+          message: "Succesfully obtained item!",
+        });
+      })
+      .catch(() => {
+        res.json({
+          status: "Failed",
+          message: "Error while obtaining item! Try again!",
+        });
+      });
+  }
 })
 
 router.post("/profile",async(req,res)=>{
